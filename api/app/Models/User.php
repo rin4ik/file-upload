@@ -32,6 +32,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function files()
+    {
+        return $this->hasMany(File::class);
+    }
+
     /**
      * The attributes that should be cast.
      *
