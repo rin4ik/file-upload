@@ -22,14 +22,14 @@
                     <a href="" class="text-sm inline-block p-3 text-gray-800">Account</a>
                 </li>
                 <li>
-                    <a href="" class="text-sm inline-block p-3 text-gray-800">Log out</a>
+                    <a @click.prevent="logout" href="" class="text-sm inline-block p-3 text-gray-800">Log out</a>
                 </li>
             </template>
         </ul>
     </header>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default ({
     setup() {
@@ -40,6 +40,15 @@ export default ({
             authenticated: 'auth/authenticated',
             user: 'auth/user',
         })
+    },
+    methods: {
+        ...mapActions({
+            logoutAction: 'auth/logout'
+        }),
+        async logout(){
+            await this.logoutAction()
+            this.$router.replace({name: 'home'})
+        }
     }
 })
 </script>

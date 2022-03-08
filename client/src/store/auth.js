@@ -36,6 +36,10 @@ export default {
                 commit('SET_AUTHENTICATED', false)
                 commit('SET_USER', null)
             })
+        },
+        async logout({ dispatch }) {
+            await axios.post('/api/logout')
+            return dispatch('me')
         }
     }
 }
