@@ -5,7 +5,7 @@
                 <router-link class="text-sm inline-block p-3 text-gray-800" to="/">Home</router-link>
             </li>
             <li>
-                <a class="text-sm inline-block p-3 text-gray-800" href="">Your files</a>
+                <router-link class="text-sm inline-block p-3 text-gray-800" :to="{name: 'uploads'}">Your files</router-link>
             </li>
         </ul> 
         <ul class="flex items-center">
