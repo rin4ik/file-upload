@@ -1,7 +1,16 @@
+@import '~filepond/dist/filepond.min.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
     @apply border-t-4 border-indigo-500
+}
+
+.filepond--drop-label, .filepond--panel-root {
+    @apply bg-gray-200 rounded-lg;
+}
+.filepond--item-panel {
+    @apply bg-indigo-500;
 }
