@@ -39,6 +39,12 @@ export default ({
                     }
                 }
             },
+            onprocessfile: (error, file) => {
+                if(error) {
+                    return
+                }
+                pond.removeFile(file)
+            },
             onaddfile: (error, file) => {
                 if(error) {
                     return
