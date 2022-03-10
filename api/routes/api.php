@@ -22,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/login', LoginController::class);
 Route::post('/logout', LogoutController::class);
+Route::post('/files/signed', [FileController::class, 'signed']);
 Route::get('/files', [FileController::class, 'index']);
