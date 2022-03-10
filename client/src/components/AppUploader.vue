@@ -11,6 +11,7 @@ export default ({
             server: {
                 process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
                     let form = new FormData()
+                    const cancelTokenSource = axios.CancelToken.source()
                     axios.post('api/files/signed', {
                         name: metadata.fileInfo.name,
                         extension: metadata.fileInfo.extension,
@@ -24,11 +25,18 @@ export default ({
                         axios.post(response.data.attributes.action, form, {
                             onUploadProgress(e) {
                                 progress(e.lengthComputable, e.loaded, e.total)
-                            }   
+                            },
+                            cancelToken: cancelTokenSource.token   
                         }).then(() =>{ 
                             load(`${file.additionalData.key}`)
                         })
                     })
+                    return {
+                        abort: () => {
+                            cancelTokenSource.cancel()
+                            abort()
+                        }
+                    }
                 }
             },
             onaddfile: (error, file) => {
