@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\FileResource;
+use App\Models\File;
 use Aws\S3\PostObjectV4;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,11 @@ class FileController extends Controller
     {
         $file = $request->user()->files()->firstOrCreate($request->only('path'), $request->only('name', 'size'));
         return new FileResource($file);
+    }
+    public function destroy(Request $request, File $file)
+    {
+        $this->authorize('destroy', $file);
+        $file->delete();
     }
     public function signed(Request $request)
     { 

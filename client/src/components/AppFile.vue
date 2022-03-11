@@ -5,16 +5,26 @@
          </div>
          <div class="-mr-3 flex items-center"> 
             <a href="" class="inline-block text-sm p-3 text-indigo-500 font-medium">Get sharable link</a>
-            <a href="" class="inline-block text-sm p-3 text-pink-500 font-medium">Delete</a>
+            <a @click.prevent="deleteFile" href="" class="inline-block text-sm p-3 text-pink-500 font-medium">Delete</a>
          </div>
      </div>
 </template>
 <script>  
+import { mapActions } from "vuex";
+
 export default ({ 
     props: {
         file: {
             required: true,
             type: Object
+        }
+    },
+    methods: {
+        ...mapActions({
+            deleteFileAction: 'files/deleteFile'
+        }),
+        deleteFile(){
+            this.deleteFileAction(this.file.uuid)
         }
     }
 })
