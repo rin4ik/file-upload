@@ -44,6 +44,7 @@ export default ({
                     return
                 }
                 pond.removeFile(file)
+                this.$emit('onprocessfile', file)
             },
             onaddfile: (error, file) => {
                 if(error) {

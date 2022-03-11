@@ -17,6 +17,11 @@ class FileController extends Controller
     {  
         return FileResource::collection($request->user()->files);
     }
+    public function store(Request $request)
+    {
+        $file = $request->user()->files()->firstOrCreate($request->only('path'), $request->only('name', 'size'));
+        return new FileResource($file);
+    }
     public function signed(Request $request)
     { 
         $filename = md5($request->name . microtime()) . '.' . $request->extension;  
