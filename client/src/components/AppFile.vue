@@ -10,7 +10,7 @@
      </div>
 </template>
 <script>  
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 
 export default ({ 
     props: {
@@ -19,12 +19,16 @@ export default ({
             type: Object
         }
     },
-    methods: {
+    methods: { 
         ...mapActions({
             deleteFileAction: 'files/deleteFile'
         }),
-        deleteFile(){
-            this.deleteFileAction(this.file.uuid)
+        ...mapMutations({
+            decrementUsage: 'usage/DECREMENT_USAGE'
+        }),
+        async deleteFile(){
+           await this.deleteFileAction(this.file.uuid)
+           this.decrementUsage(this.file.size)
         }
     }
 })

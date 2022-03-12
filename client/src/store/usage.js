@@ -12,7 +12,13 @@ export default {
     mutations: {
         SET_USAGE(state, usage) {
           state.usage = usage
-        }
+        },
+        INCREMENT_USAGE(state, usage) {
+            state.usage += usage
+        },
+        DECREMENT_USAGE(state, usage) {
+            state.usage -= usage
+        },
     },
     actions: {
         async getUsage({ commit }) {
