@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FileSignedRequest;
 use App\Http\Resources\FileResource;
 use App\Models\File;
 use Aws\S3\PostObjectV4;
@@ -28,7 +29,7 @@ class FileController extends Controller
         $this->authorize('destroy', $file);
         $file->delete();
     }
-    public function signed(Request $request)
+    public function signed(FileSignedRequest $request)
     { 
         $filename = md5($request->name . microtime()) . '.' . $request->extension;  
         $object = new PostObjectV4(
