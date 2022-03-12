@@ -30,7 +30,7 @@ export default {
         me ({ commit }) {
             return axios.get('api/user').then(response => {
                 commit('SET_AUTHENTICATED', true)
-                commit('SET_USER', response.data)
+                commit('SET_USER', response.data.data)
             })
             .catch(err => {
                 commit('SET_AUTHENTICATED', false)
