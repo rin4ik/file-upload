@@ -1,7 +1,10 @@
 <template>
     <div>
+        <div v-if="errors.size" class="bg-red-300 px-6 py-2 rounded-lg text-sm text-gray-800 mb-4">
+            {{errors.size[0]}}
+        </div>
         <div class="mb-8">
-            <app-uploader @onprocessfile="storeFile"/>
+            <app-uploader @validation="setValidationErrors" @onprocessfile="storeFile"/>
         </div>
         <div>
             <h2 class="font-medium border-b-2 border-gray-100 text-gray-800">Your files</h2>
@@ -21,6 +24,11 @@ import axios from 'axios'
 export default {
   name: 'Upload',
   components: { AppFile, AppUploader },
+  data() {
+      return {
+          errors: {}
+      }
+  },
   methods: {
       ...mapActions({
           getFiles: 'files/getFiles'
@@ -29,6 +37,9 @@ export default {
           addFile: 'files/ADD_FILE',
           incrementUsage: 'usage/INCREMENT_USAGE',
       }),
+      setValidationErrors(errors) {
+          this.errors = errors
+      },
       async storeFile(file) {
          let response = await axios.post('/api/files', {
               name: file.filename,

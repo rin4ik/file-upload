@@ -14,10 +14,10 @@ export default ({
             user: 'auth/user'
         }),
         storageFormatted(){
-            return filesize(this.user.plan.storage, {base: 2}) || 0
+            return filesize(this.user.plan.storage, {base: 2})
         },
         usageFormatted(){
-            return filesize(this.usage)
+            return filesize(this.usage, {base: 2})
         },
         percentageUsed() {
             return ((this.usage / this.user.plan.storage) * 100).toFixed(2)

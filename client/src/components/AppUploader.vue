@@ -10,6 +10,7 @@ export default ({
             allowRevert: false,
             server: {
                 process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+                    this.$emit('validation', {})
                     let form = new FormData()
                     const cancelTokenSource = axios.CancelToken.source()
                     axios.post('api/files/signed', {
@@ -30,6 +31,11 @@ export default ({
                         }).then(() =>{ 
                             load(`${file.additionalData.key}`)
                         })
+                    }).catch((e) => {
+                        if(e.response.status === 422) {
+                            this.$emit('validation', e.response.data.errors)
+                        }
+                        abort()
                     })
                     return {
                         abort: () => {
