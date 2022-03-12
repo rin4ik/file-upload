@@ -38,7 +38,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(File::class);
     }
-
+    public function usage()
+    {
+        return $this->files->sum('size');
+    }
     public function plan()
     {
         return $this->hasOneThrough(Plan::class, Subscription::class, 'user_id', 'stripe_id', 'id', 'stripe_price')

@@ -8,6 +8,9 @@
                 <router-link class="text-sm inline-block p-3 text-gray-800" :to="{name: 'uploads'}">Your files</router-link>
             </li>
         </ul> 
+        <div class="flex justify-center order-last w-full md:w-auto md:order-none">
+            <app-usage v-if="authenticated"/>
+        </div>
         <ul class="flex items-center">
             <template v-if="!authenticated">
                 <li>
@@ -30,11 +33,10 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+import AppUsage from '@/components/AppUsage'
 
 export default ({
-    setup() {
-        
-    },
+    components: { AppUsage },
     computed: {
         ...mapGetters({
             authenticated: 'auth/authenticated',
