@@ -18,6 +18,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'subscribed' => $this->subscribed('default'),
+            'ends_at'=> optional(optional($this->subscription('default'))->ends_at)->toDateTimeString(),
             'plan' => new PlanResource($this->plan),
         ];
     }

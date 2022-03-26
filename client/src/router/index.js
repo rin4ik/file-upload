@@ -5,6 +5,7 @@ import Plans from '../views/Plans.vue'
 import Register from '../views/Register.vue'
 import Upload from '../views/Upload.vue'
 import Checkout from '../views/Checkout.vue'
+import Account from '../views/Account.vue'
 
 const routes = [
     {
@@ -21,6 +22,11 @@ const routes = [
         path: '/plans',
         name: 'plans',
         component: Plans
+    },
+    {
+        path: '/account',
+        name: 'account',
+        component: Account
     },
     {
         path: '/checkout',

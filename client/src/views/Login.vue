@@ -50,7 +50,7 @@ export default {
     }),
     async login() {
         await this.loginAction(this.form)
-        this.$router.replace({name: "home"})
+        this.$router.replace({name: "account"})
     }
   }
 }
