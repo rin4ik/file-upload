@@ -18,9 +18,7 @@
             </div> 
 
             <div>
-                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Sign in
-                </button>
+                <app-button :disabled="loading" :loading="loading" type="submit" title="Sign in" /> 
             </div>
             </form>
             <p class="text-sm text-gray-800 ">Not joined yet ? 
@@ -34,10 +32,14 @@
 
 <script> 
 import { mapActions } from 'vuex'
+import AppButton from '@/components/AppButton'
+
 export default {
   name: 'Login',
+  components: {AppButton},
   data(){
       return {
+          loading: false,
           form: {
               email: '',
               password: ''
@@ -49,8 +51,15 @@ export default {
         loginAction: 'auth/login'
     }),
     async login() {
-        await this.loginAction(this.form)
-        this.$router.replace({name: "account"})
+        this.loading = true
+        try {
+             await this.loginAction(this.form)
+            this.loading = false
+            this.$router.replace({name: "account"})
+        } catch (error) {
+            this.loading = false
+        }
+       
     }
   }
 }

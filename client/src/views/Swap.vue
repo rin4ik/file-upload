@@ -9,7 +9,7 @@
                 </label>
             </div>
         </div>
-        <app-button type="submit" title="Swap" v-if="availablePlans.length" /> 
+        <app-button :disabled="loading || !form.plan" :loading="loading" type="submit" title="Swap" v-if="availablePlans.length" /> 
         <p v-else class="text-gray-800 text-sm">
             There are no available plans for you to swap to right now, because you're using too much storage.
         </p>
@@ -29,6 +29,7 @@ export default ({
                 plan: null
             },
             plans: [],
+            loading: false,
             planAvailability: [],
         }
     },
@@ -37,12 +38,12 @@ export default ({
         ...mapActions({
             me: 'auth/me'
         }),
-        async swap() {
-            if(this.form.plan) {
-                await axios.patch('api/subscriptions', this.form) 
-                await this.me()
-                this.$router.replace({ name: 'account' })
-            } 
+        async swap() { 
+            this.loading = true
+            await axios.patch('api/subscriptions', this.form) 
+            await this.me()
+            this.loading = false
+            this.$router.replace({ name: 'account' })  
         }
     },
     computed: {
