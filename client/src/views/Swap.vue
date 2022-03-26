@@ -9,9 +9,7 @@
                 </label>
             </div>
         </div>
-        <button v-if="availablePlans.length" class="bg-indigo-500 rounded-lg font-medium text-white px-4 py-3 leading-none">
-            Swap
-        </button>
+        <app-button type="submit" title="Swap" v-if="availablePlans.length" /> 
         <p v-else class="text-gray-800 text-sm">
             There are no available plans for you to swap to right now, because you're using too much storage.
         </p>
@@ -22,9 +20,9 @@
 import axios from "axios"
 import AppPlan from '@/components/AppPlan'
 import { mapGetters, mapActions } from "vuex"
-
+import AppButton from '@/components/AppButton'
 export default ({
-    components: { AppPlan },
+    components: { AppPlan, AppButton },
     data() {
         return {
             form: {
@@ -40,9 +38,11 @@ export default ({
             me: 'auth/me'
         }),
         async swap() {
-            await axios.patch('api/subscriptions', this.form) 
-            await this.me()
-            this.$router.replace({ name: 'account' })
+            if(this.form.plan) {
+                await axios.patch('api/subscriptions', this.form) 
+                await this.me()
+                this.$router.replace({ name: 'account' })
+            } 
         }
     },
     computed: {
