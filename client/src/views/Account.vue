@@ -4,7 +4,7 @@
             Subscription
         </h2>
         <div class="mt-3 text-sm">
-            <p class="mb-2">You're on the {{user.plan.name}} plan. 
+            <p class="mb-4">You're on the {{user.plan.name}} plan. 
                 <template v-if="user.ends_at">
                     Your current subscription ends {{user.ends_at}}
                 </template>    
