@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use Exception;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
@@ -20,6 +21,9 @@ class SubscriptionController extends Controller
     public function update(Request $request)
     {
         $plan = Plan::whereSlug($request->plan)->first(); 
+        if(!$request->user()->canDowngradeToPlan($plan)) {
+            throw new Exception();
+        }
         if (!$plan->buyable) {
            $request->user()->subscription('default')->cancel();
            return;
