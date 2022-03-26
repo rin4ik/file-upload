@@ -6,6 +6,7 @@ import Register from '../views/Register.vue'
 import Upload from '../views/Upload.vue'
 import Checkout from '../views/Checkout.vue'
 import Account from '../views/Account.vue'
+import Swap from '../views/Swap.vue'
 
 const routes = [
     {
@@ -27,6 +28,11 @@ const routes = [
         path: '/account',
         name: 'account',
         component: Account
+    },
+    {
+        path: '/swap',
+        name: 'swap',
+        component: Swap
     },
     {
         path: '/checkout',
