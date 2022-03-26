@@ -28,7 +28,7 @@
                     <a @click.prevent="logout" href="" class="text-sm inline-block p-3 text-gray-800">Log out</a>
                 </li>
             </template>
-            <li>
+            <li v-if="!authenticated || !user.subscribed">
                 <router-link class="text-sm inline-block p-3 text-indigo-600" :to="{name: 'plans'}">Upgrade ✨</router-link>
             </li>
         </ul>

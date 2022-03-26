@@ -17,6 +17,7 @@ class UserResource extends JsonResource
         return [
             'name' => $this->name,
             'email' => $this->email,
+            'subscribed' => $this->subscribed('default'),
             'plan' => new PlanResource($this->plan),
         ];
     }
