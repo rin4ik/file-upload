@@ -34,3 +34,4 @@ Route::delete('/files/{file:uuid}', [FileController::class, 'destroy']);
 Route::get('/plans', PlanController::class);
 Route::get('/subscriptions/intent', StripeIntentController::class);
 Route::post('/subscriptions', [SubscriptionController::class, 'store']);
+Route::patch('/subscriptions', [SubscriptionController::class, 'update']);

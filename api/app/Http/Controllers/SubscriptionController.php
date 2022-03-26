@@ -17,8 +17,13 @@ class SubscriptionController extends Controller
         $request->user()->newSubscription('default', $plan->stripe_id)
             ->create($request->token);
     }
-    public function swap()
+    public function update(Request $request)
     {
-        # code...
+        $plan = Plan::whereSlug($request->plan)->first(); 
+        if (!$plan->buyable) {
+           $request->user()->subscription('default')->cancel();
+           return;
+        }
+        $request->user()->subscription('default')->swap($plan->stripe_id);
     }
 }

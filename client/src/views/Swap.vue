@@ -21,10 +21,10 @@
 <script> 
 import axios from "axios"
 import AppPlan from '@/components/AppPlan'
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 
 export default ({
-    components: {AppPlan},
+    components: { AppPlan },
     data() {
         return {
             form: {
@@ -36,8 +36,13 @@ export default ({
     },
 
     methods: {
-        swap() {
-            console.log(this.form)
+        ...mapActions({
+            me: 'auth/me'
+        }),
+        async swap() {
+            await axios.patch('api/subscriptions', this.form) 
+            await this.me()
+            this.$router.replace({ name: 'account' })
         }
     },
     computed: {

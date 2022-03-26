@@ -49,6 +49,11 @@ class User extends Authenticatable
             ->withDefault(Plan::free()->toArray());
     }
 
+    public function canDowngradeToPlan(Plan $plan)
+    {
+        return $this->usage() <=  $plan->storage;
+    }
+
     /**
      * The attributes that should be cast.
      *
