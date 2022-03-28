@@ -9,7 +9,7 @@
                     Your current subscription ends {{user.ends_at}}
                 </template>    
             </p>
-            <router-link :to="{name: 'swap'}" class="text-indigo-500">Swap plan</router-link>
+            <router-link v-if="user.subscribed" :to="{name: 'swap'}" class="text-indigo-500">Swap plan</router-link>
         </div>
     </div>
 </template> 
