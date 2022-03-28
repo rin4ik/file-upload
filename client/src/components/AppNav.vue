@@ -17,7 +17,7 @@
                     <router-link class="text-sm inline-block p-3 text-gray-800" to="/login">Sign in</router-link>
                 </li>
                 <li>
-                    <a class="text-sm inline-block p-3 text-gray-800" href="">Create account</a>
+                    <router-link class="text-sm inline-block p-3 text-gray-800" to="/register">Create account</router-link>
                 </li>
             </template>
             <template v-else>
