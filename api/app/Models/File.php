@@ -37,4 +37,9 @@ class File extends Model
      * @var array<int, string>
      */
     protected $guarded = []; 
+    
+    public function links()
+    {
+        return $this->hasOne(FileLink::class);
+    }
 }
