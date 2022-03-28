@@ -3,6 +3,7 @@
 </template>
 <script> 
 import axios from "axios"
+import { mapActions } from "vuex"
 
 export default ({
     props: {
@@ -12,6 +13,9 @@ export default ({
         }
     },
     methods: {
+        ...mapActions({
+            'snack': 'snack/snack'
+        }),
         copyToClipboard(value) {
             let dummy = document.createElement('input')
             dummy.value = value
@@ -19,6 +23,7 @@ export default ({
             dummy.select()
             document.execCommand('copy')
             document.body.removeChild(dummy)
+            this.snack('Copied to clipboard!')
         },
         async getLink() {
             const response = await axios.post(`api/files/${this.file.uuid}/links`)
