@@ -22,13 +22,15 @@ export default ({
     },
     methods: { 
         ...mapActions({
-            deleteFileAction: 'files/deleteFile'
+            deleteFileAction: 'files/deleteFile',
+            snack: 'snack/snack'
         }),
         ...mapMutations({
             decrementUsage: 'usage/DECREMENT_USAGE'
         }),
         async deleteFile(){
            await this.deleteFileAction(this.file.uuid)
+            this.snack('File was deleted')
            this.decrementUsage(this.file.size)
         }
     }

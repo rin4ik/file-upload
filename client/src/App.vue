@@ -9,10 +9,7 @@
 import AppNav from '@/components/AppNav'
 import AppSnack from '@/components/AppSnack'
 export default ({
-    components: {AppNav, AppSnack},
-    setup() {
-        
-    },
+    components: {AppNav, AppSnack}
 })
 </script>
 
