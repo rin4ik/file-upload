@@ -11,6 +11,7 @@ class SubscriptionController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum']);
+        $this->middleware(['subscribed'])->only('update');
     }
     public function store(Request $request)
     {
@@ -27,10 +28,11 @@ class SubscriptionController extends Controller
         $this->validate($request, [
             'plan' => ['required', 'exists:plans,slug']
         ]);
+
         $plan = Plan::whereSlug($request->plan)->first(); 
         if(!$request->user()->canDowngradeToPlan($plan)) {
             throw new Exception();
-        }
+        }   
         if (!$plan->buyable) {
            $request->user()->subscription('default')->cancel();
            return;
