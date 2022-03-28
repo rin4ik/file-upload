@@ -21,11 +21,18 @@
                         {{errors.email[0]}}
                     </div>
                 </div>
-                <div>
+                <div style="margin-bottom: 1rem !important">
                     <label for="password" class="sr-only">Password</label>
                     <input v-model="form.password"  :class="{'border-red-500' : errors.password}" id="password" name="password" type="password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
                     <div v-if="errors.password" class="text-red-500 text-sm mt-2">
                         {{errors.password[0]}}
+                    </div>
+                </div>
+                <div>
+                    <label for="password_confirmation" class="sr-only">Password Confirmation</label>
+                    <input v-model="form.password_confirmation"  :class="{'border-red-500' : errors.password_confirmation}" id="password_confirmation" name="password_confirmation" type="password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password Confirmation">
+                    <div v-if="errors.password_confirmation" class="text-red-500 text-sm mt-2">
+                        {{errors.password_confirmation[0]}}
                     </div>
                 </div>
             </div> 
@@ -57,6 +64,7 @@ export default {
           form: {
               email: '',
               password: '',
+              password_confirmation: '',
               name: '',
           },
           errors: []
