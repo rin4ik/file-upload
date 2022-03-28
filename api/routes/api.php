@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FileLinkController;
@@ -27,6 +28,7 @@ Route::get('/user', UserController::class);
 Route::get('/user/usage', UserUsageController::class);
 Route::get('/user/plan_availability', UserPlanAvailabilityController::class);
 Route::post('/login', LoginController::class);
+Route::post('/register', RegisterController::class);
 Route::post('/logout', LogoutController::class);
 Route::post('/files/signed', [FileController::class, 'signed']);
 Route::get('/files', [FileController::class, 'index']);
@@ -38,3 +40,4 @@ Route::post('/subscriptions', [SubscriptionController::class, 'store']);
 Route::patch('/subscriptions', [SubscriptionController::class, 'update']);
 Route::post('/files/{file:uuid}/links', [FileLinkController::class, 'store']);
 Route::get('/files/{file:uuid}/links', [FileLinkController::class, 'show']);
+
