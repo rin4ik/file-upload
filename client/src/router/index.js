@@ -10,8 +10,10 @@ import Swap from '../views/Swap.vue'
 import Download from '../views/Download.vue'
 import subscribed from '@/middleware/subscribed'
 import auth from '@/middleware/auth'
+import guest from '@/middleware/guest'
 import store from '@/store'
 import middlewarePipeline from './middlewarePipeline'
+
 const routes = [
     {
         path: '/',
@@ -65,12 +67,18 @@ const routes = [
     {
         path: '/login',
         name: 'login',
-        component: Login
+        component: Login,
+        meta: {
+            middleware: [guest]
+        }
     },
     {
         path: '/register',
         name: 'register',
-        component: Register
+        component: Register,
+        meta: {
+            middleware: [guest]
+        }
     },
 ]
 
