@@ -4,7 +4,7 @@ import router from './router'
 import axios from 'axios'
 import store from './store'
 
-axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.baseURL = process.env.VUE_APP_API_URL
 axios.defaults.withCredentials = true
 
 store.dispatch('auth/me').then(() => {
